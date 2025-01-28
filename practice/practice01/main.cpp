@@ -18,7 +18,7 @@ void printVector(const std::vector<int>& vec) {
     std::cout << "\n";
 }
 
-
+//
 //Did use some AI from chat gpt to explain how to do some things, especially with setting up visual studio alongside the tutorial video on blackboard.
 // Function to double the values in the vector (by reference to modify original vector)
 void doubleVector(std::vector<int>& vec) {
