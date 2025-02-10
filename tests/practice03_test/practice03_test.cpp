@@ -12,7 +12,7 @@ namespace practice03test
 		
 		TEST_METHOD(TestMethod1)
 		{
-			Assert::AreEqual(10, MathUtils::sumRange(1, 5));
+			Assert::AreEqual(15, MathUtils::sumRange(1, 5));
 		}
 	};
 }
