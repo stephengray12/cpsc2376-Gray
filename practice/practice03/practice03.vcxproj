@@ -133,7 +133,7 @@
     <None Include="fixes.md" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="proof.png" />
+    <Image Include="..\..\..\..\..\Downloads\proof.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
