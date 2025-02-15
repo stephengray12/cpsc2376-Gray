@@ -1,20 +1,53 @@
-// practice04.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <iomanip>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+// Function to convert temperature
+double convertTemperature(double temp, char scale = 'F') {
+    if (scale == 'F' || scale == 'f') {
+        return (temp * 9.0 / 5.0) + 32.0; // Celsius to Fahrenheit
+    }
+    else if (scale == 'C' || scale == 'c') {
+        return (temp - 32.0) * 5.0 / 9.0; // Fahrenheit to Celsius
+    }
+    else {
+        std::cerr << "Invalid scale. Use 'C' or 'F'." << std::endl;
+        return temp; // Return the original value if invalid input
+    }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int main() {
+    int choice;
+    double temperature, converted;
+    char scale;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    std::cout << "1. Convert Celsius to Fahrenheit\n";
+    std::cout << "2. Convert Fahrenheit to Celsius\n";
+    std::cout << "Choose an option: ";
+    std::cin >> choice;
+
+    if (choice == 1) {
+        scale = 'F';
+        std::cout << "Enter temperature in Celsius: ";
+    }
+    else if (choice == 2) {
+        scale = 'C';
+        std::cout << "Enter temperature in Fahrenheit: ";
+    }
+    else {
+        std::cerr << "Invalid choice. Exiting.\n";
+        return 1;
+    }
+
+    std::cin >> temperature;
+    converted = convertTemperature(temperature, scale);
+
+    std::cout << std::fixed << std::setprecision(2);
+    if (scale == 'F') {
+        std::cout << "Converted: " << converted << std::endl;
+    }
+    else {
+        std::cout << "Converted: " << converted << std::endl;
+    }
+
+    return 0;
+}
