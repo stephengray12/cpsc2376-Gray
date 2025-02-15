@@ -18,11 +18,5 @@
     <ClCompile Include="prompt1a.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="prompt2a.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="prompt3a.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
