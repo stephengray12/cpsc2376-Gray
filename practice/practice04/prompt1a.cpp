@@ -49,10 +49,10 @@ int main() {
 
     std::cout << std::fixed << std::setprecision(2);
     if (scale == 'F') {
-        std::cout << "Converted: " << converted << "\u00B0F\n";
+        std::cout << "Converted: " << converted << std::endl;
     }
     else {
-        std::cout << "Converted: " << converted << "\u00B0C\n";
+        std::cout << "Converted: " << converted << std::endl;
     }
 
     return 0;
