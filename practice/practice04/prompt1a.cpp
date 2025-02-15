@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 // Function to convert temperature
 double convertTemperature(double temp, char scale = 'F') {
@@ -23,30 +24,35 @@ int main() {
     std::cout << "1. Convert Celsius to Fahrenheit\n";
     std::cout << "2. Convert Fahrenheit to Celsius\n";
     std::cout << "Choose an option: ";
-    std::cin >> choice;
+    while (!(std::cin >> choice) || (choice != 1 && choice != 2)) {
+        std::cerr << "Invalid choice. Please enter 1 or 2: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 
     if (choice == 1) {
         scale = 'F';
         std::cout << "Enter temperature in Celsius: ";
     }
-    else if (choice == 2) {
+    else {
         scale = 'C';
         std::cout << "Enter temperature in Fahrenheit: ";
     }
-    else {
-        std::cerr << "Invalid choice. Exiting.\n";
-        return 1;
+
+    while (!(std::cin >> temperature)) {
+        std::cerr << "Invalid input. Please enter a numeric value: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
-    std::cin >> temperature;
     converted = convertTemperature(temperature, scale);
 
     std::cout << std::fixed << std::setprecision(2);
     if (scale == 'F') {
-        std::cout << "Converted: " << converted << std::endl;
+        std::cout << "Converted: " << converted << "\u00B0F\n";
     }
     else {
-        std::cout << "Converted: " << converted << std::endl;
+        std::cout << "Converted: " << converted << "\u00B0C\n";
     }
 
     return 0;
