@@ -34,7 +34,7 @@ public:
         for (const auto& row : board) {
             for (const auto& cell : row) {
                 char symbol = '.';
-                if (cell == Player::PLAYER_1) symbol = 'X';
+                if (cell == Player::PLAYER_1) symbol = 'x';
                 else if (cell == Player::PLAYER_2) symbol = 'O';
                 cout << " " << symbol;
             }
@@ -43,11 +43,14 @@ public:
         cout << "-------------------\n";
     }
 
+	// Returns true if the token was successfully dropped, false otherwise
     bool dropToken(int col) {
         if (col < 1 || col > COLS || board[0][col - 1] != Player::NONE) {
             cout << "Invalid move. Try again." << endl;
             return false;
         }
+
+        
         for (int row = ROWS - 1; row >= 0; --row) {
             if (board[row][col - 1] == Player::NONE) {
                 board[row][col - 1] = currentPlayer;
