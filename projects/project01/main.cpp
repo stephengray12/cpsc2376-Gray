@@ -24,13 +24,14 @@ public:
 
     void printRules() {
         cout << "Welcome to Connect Four!" << endl;
-        cout << "Players take turns dropping tokens into a column." << endl;
         cout << "The first player to connect four in a row, column, or diagonal wins!" << endl;
         cout << "Enter a column number (1-7) to drop your token." << endl;
     }
 
     void displayBoard() {
+        
         cout << "\n 1 2 3 4 5 6 7\n";
+        cout << "---------------\n";
         for (const auto& row : board) {
             for (const auto& cell : row) {
                 char symbol = '.';
@@ -40,7 +41,7 @@ public:
             }
             cout << "\n";
         }
-        cout << "-------------------\n";
+        cout << "---------------\n";
     }
 
 	// Returns true if the token was successfully dropped, false otherwise
