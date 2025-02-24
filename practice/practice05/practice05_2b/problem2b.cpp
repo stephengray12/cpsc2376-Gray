@@ -1,20 +1,23 @@
-// practice05_2b.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <vector>
+#include <algorithm> 
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+   
+    std::vector<int> numbers = { 12, 45, 23, 78, 56, 89, 34, 67 };
+
+    if (numbers.empty()) {
+        std::cerr << "Error: The vector is empty!" << std::endl;
+        return 1;
+    }
+
+    // Find the largest element using std::max_element
+    auto max_it = std::max_element(numbers.begin(), numbers.end());
+    // Find the smallest element using std::min_element
+    auto min_it = std::min_element(numbers.begin(), numbers.end());
+
+    std::cout << "Largest element: " << *max_it << std::endl;
+    std::cout << "Smallest element: " << *min_it << std::endl;
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
