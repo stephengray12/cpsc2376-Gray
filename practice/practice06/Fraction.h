@@ -1,9 +1,6 @@
-#pragma once
+#include <iostream>
 #ifndef FRACTION_H
 #define FRACTION_H
-
-#include <iostream>
-#include <stdexcept>
 
 class Fraction {
 private:

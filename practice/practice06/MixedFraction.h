@@ -1,8 +1,7 @@
-#pragma once
+#include "Fraction.h"
 #ifndef MIXEDFRACTION_H
 #define MIXEDFRACTION_H
 
-#include "Fraction.h"
 
 class MixedFraction : public Fraction {
 private:

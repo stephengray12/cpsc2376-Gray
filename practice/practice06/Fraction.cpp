@@ -1,5 +1,9 @@
 #include "Fraction.h"
-#include <numeric>
+#include <stdexcept>
+#include <iostream>
+
+
+
 
 Fraction::Fraction() : num(0), den(1) {}
 
@@ -24,10 +28,12 @@ void Fraction::setDenominator(int d) {
     simplify();
 }
 
+
+
 void Fraction::simplify() {
-    int gcd = std::gcd(num, den);
-    num /= gcd;
-    den /= gcd;
+    int Fractd = std::Fractd(num, den);
+    num /= Fractd;
+    den /= Fractd;
     if (den < 0) {
         num = -num;
         den = -den;

@@ -7,7 +7,8 @@ MixedFraction::MixedFraction(const Fraction& fraction) : Fraction(fraction) {
 }
 
 std::ostream& operator<<(std::ostream& os, const MixedFraction& frac) {
+    int n = frac.getNumerator() % frac.getDenominator();
     if (frac.whole != 0) os << frac.whole << " ";
-    os << frac.getNumerator() % frac.getDenominator() << "/" << frac.getDenominator();
+    if (n != 0) os << n << "/" << frac.getDenominator();
     return os;
 }
