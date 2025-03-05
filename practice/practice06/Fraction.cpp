@@ -1,9 +1,15 @@
 #include "Fraction.h"
-#include <stdexcept>
 #include <iostream>
 
-
-
+// Helper function to compute GCD using the Euclidean Algorithm
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
 
 Fraction::Fraction() : num(0), den(1) {}
 
@@ -28,12 +34,10 @@ void Fraction::setDenominator(int d) {
     simplify();
 }
 
-
-
 void Fraction::simplify() {
-    int Fractd = std::Fractd(num, den);
-    num /= Fractd;
-    den /= Fractd;
+    int commonDivisor = gcd(abs(num), abs(den));
+    num /= commonDivisor;
+    den /= commonDivisor;
     if (den < 0) {
         num = -num;
         den = -den;
@@ -53,11 +57,11 @@ Fraction operator*(const Fraction& lhs, const Fraction& rhs) {
 }
 
 Fraction operator/(const Fraction& lhs, const Fraction& rhs) {
-    if (rhs.num == 0) throw std::invalid_argument("Cannot divide by zero");
+    if (rhs.num == 0) throw std::invalid_argument("Division by zero");
     return Fraction(lhs.num * rhs.den, lhs.den * rhs.num);
 }
 
-std::ostream& operator<<(std::ostream& os, const Fraction& frac) {
-    os << frac.num << "/" << frac.den;
-    return os;
+std::ostream& operator<<(std::ostream& out, const Fraction& fraction) {
+    out << fraction.num << "/" << fraction.den;
+    return out;
 }

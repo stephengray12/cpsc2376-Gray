@@ -1,7 +1,7 @@
-#include "Fraction.h"
 #ifndef MIXEDFRACTION_H
 #define MIXEDFRACTION_H
 
+#include "Fraction.h"
 
 class MixedFraction : public Fraction {
 private:
@@ -9,7 +9,7 @@ private:
 public:
     MixedFraction(int whole, int n, int d);
     MixedFraction(const Fraction& fraction);
-    friend std::ostream& operator<<(std::ostream& os, const MixedFraction& frac);
+    friend std::ostream& operator<<(std::ostream& out, const MixedFraction& mf);
 };
 
 #endif

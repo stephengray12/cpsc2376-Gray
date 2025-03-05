@@ -1,6 +1,8 @@
-#include <iostream>
 #ifndef FRACTION_H
 #define FRACTION_H
+
+#include <iostream>
+#include <stdexcept>
 
 class Fraction {
 private:
@@ -19,7 +21,8 @@ public:
     friend Fraction operator-(const Fraction& lhs, const Fraction& rhs);
     friend Fraction operator*(const Fraction& lhs, const Fraction& rhs);
     friend Fraction operator/(const Fraction& lhs, const Fraction& rhs);
-    friend std::ostream& operator<<(std::ostream& os, const Fraction& frac);
+
+    friend std::ostream& operator<<(std::ostream& out, const Fraction& fraction);
 };
 
 #endif
