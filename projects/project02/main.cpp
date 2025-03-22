@@ -1,20 +1,49 @@
-// project02.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
+#include "game.h"
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+    Game game;
+    char playAgain;
+
+    std::cout << "Welcome to Connect Four!\n";
+    std::cout << "Players take turns dropping tokens into columns (1-7).\n";
+
+    do {
+        game.resetBoard();
+        Status state = ONGOING;
+
+        while (state == ONGOING) {
+            std::cout << game;
+            std::cout << "Player " << (game.getCurrentPlayer() == PLAYER_1 ? "1 (X)" : "2 (O)") << ", enter column (1-7): ";
+
+            int colInput;
+            std::cin >> colInput;
+
+            // Try to play the move
+            int col = colInput - 1; // Convert to 0-based index
+            Game temp = game; // Copy to test if move changes the board
+            game.play(col);
+
+            // If the board didn't change, it was invalid
+            if (temp.status() == game.status()) {
+                continue;
+            }
+
+            state = game.status();
+            if (state == ONGOING) {
+                game.switchPlayer();
+            }
+        }
+
+        std::cout << game;
+        if (state == PLAYER_1_WINS) std::cout << "Player 1 (X) wins!\n";
+        else if (state == PLAYER_2_WINS) std::cout << "Player 2 (O) wins!\n";
+        else std::cout << "It's a draw!\n";
+
+        std::cout << "Play again? (y/n): ";
+        std::cin >> playAgain;
+
+    } while (playAgain == 'y' || playAgain == 'Y');
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
