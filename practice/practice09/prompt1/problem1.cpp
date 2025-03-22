@@ -1,20 +1,45 @@
-// prompt1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+    float redPotion{ 0.0f };
+    float bluePotion{ 0.0f };
+    float* flask{ nullptr };
+
+    std::string input;
+
+    while (true) {
+        std::cout << "Which potion would you like to add to? (Red/Blue/Done): ";
+        std::getline(std::cin, input);
+
+        if (input == "Done" || input == "done") {
+            break;
+        }
+        else if (input == "Red" || input == "red") {
+            flask = &redPotion;
+        }
+        else if (input == "Blue" || input == "blue") {
+            flask = &bluePotion;
+        }
+        else {
+            std::cout << "Invalid choice. Please enter Red, Blue, or Done.\n";
+            continue;
+        }
+
+        float amount;
+        std::cout << "How many mL would you like to add? ";
+        std::cin >> amount;
+        std::cin.ignore();
+
+        *flask += amount;
+
+        std::cout << "Red Potion: " << redPotion << " mL\n";
+        std::cout << "Blue Potion: " << bluePotion << " mL\n";
+    }
+
+    std::cout << "Brewing complete. Final potion levels:\n";
+    std::cout << "Red Potion: " << redPotion << " mL\n";
+    std::cout << "Blue Potion: " << bluePotion << " mL\n";
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
