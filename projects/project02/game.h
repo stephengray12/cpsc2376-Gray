@@ -10,7 +10,7 @@ enum Player { NONE, PLAYER_1, PLAYER_2 };
 enum Status { ONGOING, PLAYER_1_WINS, PLAYER_2_WINS, DRAW };
 
 class Game {
-private:
+public:
     static const int ROWS = 6;
     static const int COLS = 7;
     std::vector<std::vector<Player>> board;
