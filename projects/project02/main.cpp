@@ -19,13 +19,17 @@ int main() {
             int colInput;
             std::cin >> colInput;
 
-            // Try to play the move
-            int col = colInput - 1; // Convert to 0-based index
-            Game temp = game; // Copy to test if move changes the board
-            game.play(col);
+            // Input validation
+            if (!std::cin || colInput < 1 || colInput > 7) {
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                std::cout << "Invalid input. Please enter a number from 1 to 7.\n";
+                continue;
+            }
 
-            // If the board didn't change, it was invalid
-            if (temp.status() == game.status()) {
+            int col = colInput - 1; // Convert to 0-based index
+            if (!game.play(col)) {
+                std::cout << "Column full or invalid. Try again.\n";
                 continue;
             }
 

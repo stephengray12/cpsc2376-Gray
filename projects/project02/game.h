@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GAME_H
 #define GAME_H
 
@@ -19,10 +18,10 @@ private:
 public:
     Game();                         // Constructor
     void resetBoard();              // Resets the board and sets player 1
-    void play(int col);             // Executes a move for current player
+    bool play(int col);             // Executes a move; returns true if move valid
     Status status() const;          // Returns current game status
     void switchPlayer();            // Switches to the other player
-    Player getCurrentPlayer() const; // Returns current player (for display)
+    Player getCurrentPlayer() const; // Returns current player
 
     friend std::ostream& operator<<(std::ostream& os, const Game& game); // For board display
 };

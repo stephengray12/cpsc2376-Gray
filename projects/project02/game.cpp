@@ -9,28 +9,29 @@ void Game::resetBoard() {
     currentPlayer = PLAYER_1;
 }
 
-void Game::play(int col) {
-    // Ignore invalid move (outside column or column full)
+bool Game::play(int col) {
+    // Prevent invalid or out-of-bounds column
     if (col < 0 || col >= COLS || board[0][col] != NONE) {
-        return;
+        return false;
     }
 
     for (int row = ROWS - 1; row >= 0; --row) {
         if (board[row][col] == NONE) {
             board[row][col] = currentPlayer;
-            break;
+            return true;
         }
     }
+
+    return false;
 }
 
 Status Game::status() const {
-    // Check win conditions
     for (int row = 0; row < ROWS; ++row) {
         for (int col = 0; col < COLS; ++col) {
             Player token = board[row][col];
             if (token == NONE) continue;
 
-            // Horizontal
+            // Horizontal check
             if (col <= COLS - 4 &&
                 token == board[row][col + 1] &&
                 token == board[row][col + 2] &&
@@ -38,7 +39,7 @@ Status Game::status() const {
                 return (token == PLAYER_1) ? PLAYER_1_WINS : PLAYER_2_WINS;
             }
 
-            // Vertical
+            // Vertical check
             if (row <= ROWS - 4 &&
                 token == board[row + 1][col] &&
                 token == board[row + 2][col] &&
@@ -46,30 +47,31 @@ Status Game::status() const {
                 return (token == PLAYER_1) ? PLAYER_1_WINS : PLAYER_2_WINS;
             }
 
-            // Diagonal /
+            // Diagonal (top-left to bottom-right)
+            if (row <= ROWS - 4 && col <= COLS - 4 &&
+                token == board[row + 1][col + 1] &&
+                token == board[row + 2][col + 2] &&
+                token == board[row + 3][col + 3]) {
+                return (token == PLAYER_1) ? PLAYER_1_WINS : PLAYER_2_WINS;
+            }
+
+            // Diagonal (bottom-left to top-right)
             if (row >= 3 && col <= COLS - 4 &&
                 token == board[row - 1][col + 1] &&
                 token == board[row - 2][col + 2] &&
                 token == board[row - 3][col + 3]) {
                 return (token == PLAYER_1) ? PLAYER_1_WINS : PLAYER_2_WINS;
             }
-
-            // Diagonal \
-            if (row <= ROWS - 4 && col <= COLS - 4 &&
-            token == board[row + 1][col + 1] &&
-                token == board[row + 2][col + 2] &&
-                token == board[row + 3][col + 3]; {
-                    return (token == PLAYER_1) ? PLAYER_1_WINS : PLAYER_2_WINS;
-            }
         }
     }
 
-    // Check for draw
+    // Check for ongoing game (any empty space left)
     for (const auto& row : board) {
         for (Player cell : row) {
             if (cell == NONE) return ONGOING;
         }
     }
+
     return DRAW;
 }
 
@@ -81,7 +83,6 @@ Player Game::getCurrentPlayer() const {
     return currentPlayer;
 }
 
-// Optional: display method via ostream operator
 std::ostream& operator<<(std::ostream& os, const Game& game) {
     os << "\n 1 2 3 4 5 6 7\n";
     os << "---------------\n";
