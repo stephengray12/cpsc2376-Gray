@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-// Plain enums as required
+
 enum Player { NONE, PLAYER_1, PLAYER_2 };
 enum Status { ONGOING, PLAYER_1_WINS, PLAYER_2_WINS, DRAW };
 
@@ -16,14 +16,14 @@ private:
     Player currentPlayer;
 
 public:
-    Game();                         // Constructor
-    void resetBoard();              // Resets the board and sets player 1
-    bool play(int col);             // Executes a move; returns true if move valid
-    Status status() const;          // Returns current game status
-    void switchPlayer();            // Switches to the other player
-    Player getCurrentPlayer() const; // Returns current player
+    Game();                         
+    void resetBoard();              
+    bool play(int col);            
+    Status status() const;         
+    void switchPlayer();           
+    Player getCurrentPlayer() const; 
 
-    friend std::ostream& operator<<(std::ostream& os, const Game& game); // For board display
+    friend std::ostream& operator<<(std::ostream& os, const Game& game); 
 };
 
 #endif
