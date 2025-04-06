@@ -1,20 +1,75 @@
-// practice10.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <memory>
+#include <iomanip>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+constexpr double PI = 3.141592653589793;
+
+class Shape {
+public:
+    virtual double getArea() const = 0;
+    virtual ~Shape() = default;
+};
+
+class Rectangle : public Shape {
+private:
+    double width, height;
+
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+    double getArea() const override {
+        return width * height;
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+    double getArea() const override {
+        return PI * radius * radius;
+    }
+};
+
+void printAllAreas(const std::vector<std::unique_ptr<Shape>>& shapes) {
+    for (const auto& shape : shapes) {
+        std::cout << "Area: " << std::fixed << std::setprecision(4) << shape->getArea() << std::endl;
+    }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int main() {
+    std::ifstream file("shapes.txt");
+    if (!file) {
+        std::cerr << "Failed to open shapes.txt\n";
+        return 1;
+    }
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    std::vector<std::unique_ptr<Shape>> shapes;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::string type;
+        iss >> type;
+
+        if (type == "rectangle") {
+            double width, height;
+            if (iss >> width >> height) {
+                shapes.push_back(std::make_unique<Rectangle>(width, height));
+            }
+        }
+        else if (type == "circle") {
+            double radius;
+            if (iss >> radius) {
+                shapes.push_back(std::make_unique<Circle>(radius));
+            }
+        }
+    }
+
+    printAllAreas(shapes);
+    return 0;
+}

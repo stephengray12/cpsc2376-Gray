@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="practice10.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="shapes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
