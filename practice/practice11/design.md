@@ -23,3 +23,46 @@
 - return game
 - View lending records
 
+### 2) Classes
+
+
+```cpp
+
+class Game {
+public:
+    Game(int id, std::string name, int totalCopies);
+
+    int getId() const;
+    std::string getName() const;
+    int getAvailableCopies() const;
+    void checkoutCopy();
+    void returnCopy();
+
+private:
+    int gameId;
+    std::string name;
+    int availableCopies;
+};
+
+...
+
+
+```cpp
+
+class LendingRecord {
+public:
+    LendingRecord(int recordId, int gameId, int customerId, std::string dueDate);
+
+    int getRecordId() const;
+    int getGameId() const;
+    int getCustomerId() const;
+    std::string getDueDate() const;
+
+private:
+    int recordId;
+    int gameId;
+    int customerId;
+    std::string dueDate;
+};
+
+...
