@@ -62,3 +62,17 @@ private:
     std::string dueDate;
 };
 
+
+```cpp
+class Customer {
+public:
+    Customer(int id, std::string name);
+
+    int getId() const;
+    std::string getName() const;
+
+private:
+    int customerId;
+    std::string name;
+};
+
