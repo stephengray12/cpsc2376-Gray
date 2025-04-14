@@ -44,11 +44,8 @@ private:
     int availableCopies;
 };
 
-...
-
 
 ```cpp
-
 class LendingRecord {
 public:
     LendingRecord(int recordId, int gameId, int customerId, std::string dueDate);
