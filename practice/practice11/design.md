@@ -8,7 +8,7 @@
 
 - Game
 - Customer
-- -Lending Record
+- Lending Record
 - GameID
 - CustomerID
 - DueDate
