@@ -63,7 +63,6 @@ private:
 };
 
 
-```cpp
 class Customer {
 public:
     Customer(int id, std::string name);
