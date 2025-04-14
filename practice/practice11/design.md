@@ -75,3 +75,32 @@ private:
     std::string name;
 };
 
+
+
+```mermaid
+
+classDiagram
+    class Game {
+        +getId() int
+        +getName() string
+        +getAvailableCopies() int
+        +checkoutCopy() void
+        +returnCopy() void
+    }
+
+    class Customer {
+        +getId() int
+        +getName() string
+    }
+
+    class LendingRecord {
+        +getRecordId() int
+        +getGameId() int
+        +getCustomerId() int
+        +getDueDate() string
+    }
+
+    LendingRecord --> Game : references
+    LendingRecord --> Customer : references
+
+    ```
