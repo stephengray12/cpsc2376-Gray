@@ -1,7 +1,10 @@
 #include <iostream>
-#include <memory>
 #include <string>
+#include <memory>
 #include <algorithm>
+#include <unordered_set>
+#include <vector>
+#include <cctype>
 
 class Strategy {
 public:
@@ -18,12 +21,64 @@ public:
     }
 };
 
+class Uppercase : public Strategy {
+public:
+    std::string apply(const std::string& input) const override {
+        std::string result = input;
+        std::transform(result.begin(), result.end(), result.begin(), ::toupper);
+        return result;
+    }
+};
+
+class RemoveVowels : public Strategy {
+public:
+    std::string apply(const std::string& input) const override {
+        std::string result;
+        for (char ch : input) {
+            if (!strchr("aeiouAEIOU", ch)) {
+                result += ch;
+            }
+        }
+        return result;
+    }
+};
+
+
+
+void showMenu() {
+    std::cout << "\nChoose a filter strategy:\n"
+        << "1. Reverse\n"
+        << "2. Uppercase\n"
+        << "3. Remove vowels\n"
+        << "0. Exit\n> ";
+}
+
 int main() {
-    std::unique_ptr<Strategy> strategy = std::make_unique<Reverse>();
+    std::string input;
+    std::cout << "Enter a sentence: ";
+    std::getline(std::cin, input);
 
-    std::string text;
-    std::cout << "Enter text: ";
-    std::getline(std::cin, text);
+    std::unique_ptr<Strategy> strategy;
 
-    std::cout << "Filtered: " << strategy->apply(text) << "\n";
+    while (true) {
+        showMenu();
+        int choice;
+        std::cin >> choice;
+        std::cin.ignore(); // Flush newline from buffer
+
+        if (choice == 0) break;
+
+        switch (choice) {
+        case 1: strategy = std::make_unique<Reverse>(); break;
+        case 2: strategy = std::make_unique<Uppercase>(); break;
+        case 3: strategy = std::make_unique<RemoveVowels>(); break;
+        default:
+            std::cout << "Invalid choice.\n";
+            continue;
+        }
+
+        std::cout << "Processed: " << strategy->apply(input) << "\n";
+    }
+
+    return 0;
 }
