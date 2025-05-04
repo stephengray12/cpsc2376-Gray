@@ -98,3 +98,22 @@ std::ostream& operator<<(std::ostream& os, const Game& game) {
     os << "---------------\n";
     return os;
 }
+
+void Game::draw(Engine& engine) const {
+    int cellSize = 80;
+    for (int row = 0; row < ROWS; ++row) {
+        for (int col = 0; col < COLS; ++col) {
+            int x = col * cellSize + cellSize / 2;
+            int y = row * cellSize + cellSize + 40;
+
+            // Draw grid background
+            engine.drawRectangle(x, y, cellSize - 4, cellSize - 4, { 0, 0, 255, 255 });
+
+            // Draw token if present
+            SDL_Color color = { 0, 0, 0, 255 };
+            if (board[row][col] == PLAYER_1) color = { 255, 0, 0, 255 };
+            else if (board[row][col] == PLAYER_2) color = { 255, 255, 0, 255 };
+            engine.drawCircle(x, y, 30, color);
+        }
+    }
+}

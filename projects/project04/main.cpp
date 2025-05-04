@@ -1,53 +1,71 @@
 #include "game.h"
-#include <iostream>
+#include "Engine.h"
+#include <SDL2/SDL.h>
 
 int main() {
+    Engine engine("Connect Four", 700, 600, "Ubuntu-Bold.ttf", 28, "move.wav");
     Game game;
-    char playAgain;
+    int selectedCol = 0;
+    bool running = true;
+    bool gameOver = false;
 
-    std::cout << "Welcome to Connect Four!\n";
-    std::cout << "Players take turns dropping tokens into columns (1-7).\n";
-
-    do {
-        game.resetBoard();
-        Status state = ONGOING;
-
-        while (state == ONGOING) {
-            std::cout << game;
-            std::cout << "Player " << (game.getCurrentPlayer() == PLAYER_1 ? "1 (X)" : "2 (O)") << ", enter column (1-7): ";
-
-            int colInput;
-            std::cin >> colInput;
-
-            // Input validation
-            if (!std::cin || colInput < 1 || colInput > 7) {
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
-                std::cout << "Invalid input. Please enter a number from 1 to 7.\n";
-                continue;
-            }
-
-            int col = colInput - 1; // Convert to 0-based index
-            if (!game.play(col)) {
-                std::cout << "Column full or invalid. Try again.\n";
-                continue;
-            }
-
-            state = game.status();
-            if (state == ONGOING) {
-                game.switchPlayer();
+    while (running) {
+        SDL_Event e;
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT)
+                running = false;
+            else if (e.type == SDL_KEYDOWN) {
+                if (e.key.keysym.sym == SDLK_ESCAPE) {
+                    running = false;
+                }
+                else if (e.key.keysym.sym == SDLK_LEFT) {
+                    selectedCol = (selectedCol + 6) % 7;
+                }
+                else if (e.key.keysym.sym == SDLK_RIGHT) {
+                    selectedCol = (selectedCol + 1) % 7;
+                }
+                else if (e.key.keysym.sym == SDLK_RETURN || e.key.keysym.sym == SDLK_RETURN2) {
+                    if (!gameOver && game.play(selectedCol)) {
+                        engine.playSound();
+                        if (game.status() == ONGOING) {
+                            game.switchPlayer();
+                        }
+                        else {
+                            gameOver = true;
+                        }
+                    }
+                }
+                else if (e.key.keysym.sym == SDLK_r) {
+                    game = Game();  // Reset game
+                    selectedCol = 0;
+                    gameOver = false;
+                }
             }
         }
 
-        std::cout << game;
-        if (state == PLAYER_1_WINS) std::cout << "Player 1 (X) wins!\n";
-        else if (state == PLAYER_2_WINS) std::cout << "Player 2 (O) wins!\n";
-        else std::cout << "It's a draw!\n";
+        // Rendering
+        engine.clear({ 0, 0, 0, 255 });
+        game.draw(engine);
 
-        std::cout << "Play again? (y/n): ";
-        std::cin >> playAgain;
+        // Draw selection indicator
+        int cellSize = 80;
+        int x = selectedCol * cellSize + cellSize / 2;
+        engine.drawCircle(x, 40, 20, { 255, 255, 255, 255 });
 
-    } while (playAgain == 'y' || playAgain == 'Y');
+        // Show result
+        Status s = game.status();
+        if (s != ONGOING) {
+            std::string result;
+            if (s == PLAYER_1_WINS) result = "Player 1 Wins!";
+            else if (s == PLAYER_2_WINS) result = "Player 2 Wins!";
+            else result = "Draw!";
+            engine.drawText(result, 350, 550, { 255, 255, 0, 255 });
+            engine.drawText("Press R to Restart", 350, 580, { 150, 150, 150, 255 });
+        }
+
+        engine.flip();
+        SDL_Delay(16);
+    }
 
     return 0;
 }
