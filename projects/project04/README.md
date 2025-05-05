@@ -1,4 +1,4 @@
-﻿# Project 04 – [Your Game Name]
+﻿# Project 04 – Connect Four
  
 ## 🕹️ Description
  
