@@ -43,9 +43,4 @@
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
-  <ItemGroup>
-    <Font Include="..\..\..\..\..\Downloads\Ubuntu-Bold .ttf">
-      <Filter>Resource Files</Filter>
-    </Font>
-  </ItemGroup>
 </Project>

@@ -144,9 +144,6 @@
   <ItemGroup>
     <Media Include="..\..\..\..\..\Downloads\move.wav" />
   </ItemGroup>
-  <ItemGroup>
-    <Font Include="..\..\..\..\..\Downloads\Ubuntu-Bold .ttf" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
