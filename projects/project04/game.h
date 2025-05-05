@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <iostream>
+#include "Engine.h"
 
 
 enum Player { NONE, PLAYER_1, PLAYER_2 };
