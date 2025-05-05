@@ -39,11 +39,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\..\..\..\Downloads\move.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
+    <Font Include="Ubuntu-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="..\..\..\..\..\Downloads\Ubuntu-Bold.ttf" />
+    <Media Include="move.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>
