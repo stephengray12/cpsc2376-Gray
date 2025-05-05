@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 
 int main() {
-    Engine engine("Connect Four", 700, 600, "Ubuntu-Bold.ttf", 28, "move.wav");
+    Engine engine("Connect Four", 1000, 800, "Ubuntu-Bold.ttf", 28, "move.wav");
     Game game;
     int selectedCol = 0;
     bool running = true;
@@ -60,8 +60,8 @@ int main() {
             if (s == PLAYER_1_WINS) result = "Player 1 Wins!";
             else if (s == PLAYER_2_WINS) result = "Player 2 Wins!";
             else result = "Draw!";
-            engine.drawText(result, 350, 550, { 255, 255, 0, 255 });
-            engine.drawText("Press R to Restart", 350, 580, { 150, 150, 150, 255 });
+            engine.drawText(result, 300, 600, { 255, 255, 0, 255 });
+            engine.drawText("Press R to Restart", 300, 630, { 150, 150, 150, 255 });
         }
 
         engine.flip();
